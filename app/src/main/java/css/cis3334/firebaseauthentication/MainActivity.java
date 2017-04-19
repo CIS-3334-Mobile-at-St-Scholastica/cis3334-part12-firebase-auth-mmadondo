@@ -58,7 +58,8 @@ public class MainActivity extends AppCompatActivity {
          */
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("CIS3334", "normal login ");
+                //Log.d("CIS3334", "normal login ");
+
                 signIn(editTextEmail.getText().toString(), editTextPassword.getText().toString());
             }
         });
@@ -67,7 +68,8 @@ public class MainActivity extends AppCompatActivity {
          */
         buttonCreateLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("CIS3334", "Create Account ");
+               // Log.d("CIS3334", "Create Account ");
+
                 createAccount(editTextEmail.getText().toString(), editTextPassword.getText().toString());
             }
         });
@@ -76,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
          */
         buttonGoogleLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("CIS3334", "Google login ");
+               // Log.d("CIS3334", "Google login ");
                 googleSignIn();
             }
         });
@@ -86,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
          */
         buttonSignOut.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d("CIS3334", "Logging out - signOut ");
+              //  Log.d("CIS3334", "Logging out - signOut ");
                 signOut();
             }
         });
@@ -104,7 +106,9 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("CIS3334", "onAuthStateChanged:signed_in:" + user.getUid());
                 } else {
                     // User is signed out
-                    Log.d("CIS3334", "onAuthStateChanged:signed_out");
+                    //Log.d("CIS3334", "onAuthStateChanged:signed_out");
+
+                    textViewStatus.setText("Signed out");
                 }
                 // ...
             }
@@ -139,14 +143,18 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                        // account creation successful, update UI with the signed-in user's information
-                        Log.d("CIS3334", "createUserWithEmail:onComplete:" + task.isSuccessful());
+                       // Log.d("CIS3334", "createUserWithEmail:onComplete:" + task.isSuccessful());
+
+                        textViewStatus.setText("Account creation successful");
 
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Toast.makeText(MainActivity.this, "Authentication failed",
-                                    Toast.LENGTH_SHORT).show(); //display message
+                        //    Toast.makeText(MainActivity.this, "Authentication failed",
+                            //        Toast.LENGTH_SHORT).show(); //display message
+
+                            textViewStatus.setText("Authentication failed. Please try again");
                         }
 
                         // ...
@@ -165,15 +173,22 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         // Sign in success, update UI with the signed-in user's information
-                        Log.d("CIS3334", "signInWithEmail:onComplete:" + task.isSuccessful());
+
+                        //======Removing log call:
+                        // Log.d("CIS3334", "signInWithEmail:onComplete:" + task.isSuccessful());
+                        textViewStatus.setText("Sign in successful!");
 
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Log.w("CIS3334", "signInWithEmail:failed", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed",
-                                    Toast.LENGTH_SHORT).show();  //display message
+
+                            //========Removing Log and Toast calls
+                           // Log.w("CIS3334", "signInWithEmail:failed", task.getException());
+                          //  Toast.makeText(MainActivity.this, "Authentication failed",
+                           //         Toast.LENGTH_SHORT).show();  //display message
+
+                            textViewStatus.setText("Authentication failed. Please try again");
                         }
 
                         // ...
